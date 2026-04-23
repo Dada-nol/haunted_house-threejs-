@@ -2,13 +2,13 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Sky } from "three/addons/objects/Sky.js";
 import { Timer } from "three/addons/misc/Timer.js";
-import GUI from "lil-gui";
+// import GUI from "lil-gui";
 
 /**
  * Base
  */
 // Debug
-const gui = new GUI();
+// const gui = new GUI();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -24,16 +24,16 @@ const textureLoader = new THREE.TextureLoader();
 // Floor
 const floorAlphaTexture = textureLoader.load("./floor/alpha.webp");
 const floorColorTexture = textureLoader.load(
-  "./floor/forest_leaves_03_1k/forest_leaves_03_diff_1k.webp"
+  "./floor/forest_leaves_03_1k/forest_leaves_03_diff_1k.webp",
 );
 const floorARMTexture = textureLoader.load(
-  "./floor/forest_leaves_03_1k/forest_leaves_03_arm_1k.webp"
+  "./floor/forest_leaves_03_1k/forest_leaves_03_arm_1k.webp",
 );
 const floorNormalTexture = textureLoader.load(
-  "./floor/forest_leaves_03_1k/forest_leaves_03_nor_gl_1k.webp"
+  "./floor/forest_leaves_03_1k/forest_leaves_03_nor_gl_1k.webp",
 );
 const floorDisplacementTexture = textureLoader.load(
-  "./floor/forest_leaves_03_1k/forest_leaves_03_disp_1k.webp"
+  "./floor/forest_leaves_03_1k/forest_leaves_03_disp_1k.webp",
 );
 
 floorColorTexture.colorSpace = THREE.SRGBColorSpace;
@@ -55,26 +55,26 @@ floorDisplacementTexture.wrapT = THREE.RepeatWrapping;
 
 // Wall
 const wallColorTexture = textureLoader.load(
-  "./wall/mossy_brick_1k/mossy_brick_diff_1k.webp"
+  "./wall/mossy_brick_1k/mossy_brick_diff_1k.webp",
 );
 const wallARMTexture = textureLoader.load(
-  "./wall/mossy_brick_1k/mossy_brick_arm_1k.webp"
+  "./wall/mossy_brick_1k/mossy_brick_arm_1k.webp",
 );
 const wallNormalTexture = textureLoader.load(
-  "./wall/mossy_brick_1k/mossy_brick_nor_gl_1k.webp"
+  "./wall/mossy_brick_1k/mossy_brick_nor_gl_1k.webp",
 );
 
 wallColorTexture.colorSpace = THREE.SRGBColorSpace;
 
 // Roof
 const roofColorTexture = textureLoader.load(
-  "./roof/grey_roof_01_1k/grey_roof_01_diff_1k.webp"
+  "./roof/grey_roof_01_1k/grey_roof_01_diff_1k.webp",
 );
 const roofARMTexture = textureLoader.load(
-  "./roof/grey_roof_01_1k/grey_roof_01_arm_1k.webp"
+  "./roof/grey_roof_01_1k/grey_roof_01_arm_1k.webp",
 );
 const roofNormalTexture = textureLoader.load(
-  "./roof/grey_roof_01_1k/grey_roof_01_nor_gl_1k.webp"
+  "./roof/grey_roof_01_1k/grey_roof_01_nor_gl_1k.webp",
 );
 
 roofColorTexture.colorSpace = THREE.SRGBColorSpace;
@@ -89,13 +89,13 @@ roofNormalTexture.wrapS = THREE.RepeatWrapping;
 
 // Bush
 const bushColorTexture = textureLoader.load(
-  "./bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.webp"
+  "./bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.webp",
 );
 const bushARMTexture = textureLoader.load(
-  "./bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.webp"
+  "./bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.webp",
 );
 const bushNormalTexture = textureLoader.load(
-  "./bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.webp"
+  "./bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.webp",
 );
 
 bushColorTexture.colorSpace = THREE.SRGBColorSpace;
@@ -110,13 +110,13 @@ bushNormalTexture.wrapS = THREE.RepeatWrapping;
 
 // Grave
 const graveColorTexture = textureLoader.load(
-  "./grave/plastered_stone_wall_1/plastered_stone_wall_diff_1k.webp"
+  "./grave/plastered_stone_wall_1/plastered_stone_wall_diff_1k.webp",
 );
 const graveARMTexture = textureLoader.load(
-  "./grave/plastered_stone_wall_1/plastered_stone_wall_arm_1k.webp"
+  "./grave/plastered_stone_wall_1/plastered_stone_wall_arm_1k.webp",
 );
 const graveNormalTexture = textureLoader.load(
-  "./grave/plastered_stone_wall_1/plastered_stone_wall_nor_gl_1k.webp"
+  "./grave/plastered_stone_wall_1/plastered_stone_wall_nor_gl_1k.webp",
 );
 
 graveColorTexture.colorSpace = THREE.SRGBColorSpace;
@@ -128,7 +128,7 @@ graveNormalTexture.repeat.set(0.3, 0.4);
 // Door
 const doorColorTexture = textureLoader.load("./door/color.webp");
 const doorAmbientOcclusionTexture = textureLoader.load(
-  "./door/ambientOcclusion.webp"
+  "./door/ambientOcclusion.webp",
 );
 const doorAlphaTexture = textureLoader.load("./door/alpha.webp");
 const doorHeightTexture = textureLoader.load("./door/height.webp");
@@ -156,24 +156,24 @@ const floor = new THREE.Mesh(
     displacementMap: floorDisplacementTexture,
     displacementScale: 0.3,
     displacementBias: -0.088,
-  })
+  }),
 );
 floor.rotation.x = -Math.PI / 2;
 scene.add(floor);
 
-gui
-  .add(floor.material, "displacementScale")
-  .min(0)
-  .max(1)
-  .step(0.001)
-  .name("floorDisplacementScale");
+// gui
+//   .add(floor.material, "displacementScale")
+//   .min(0)
+//   .max(1)
+//   .step(0.001)
+//   .name("floorDisplacementScale");
 
-gui
-  .add(floor.material, "displacementBias")
-  .min(-1)
-  .max(1)
-  .step(0.001)
-  .name("floorDisplacementBias");
+// gui
+//   .add(floor.material, "displacementBias")
+//   .min(-1)
+//   .max(1)
+//   .step(0.001)
+//   .name("floorDisplacementBias");
 
 //House Container
 const house = new THREE.Group();
@@ -188,7 +188,7 @@ const walls = new THREE.Mesh(
     roughnessMap: wallARMTexture,
     metalnessMap: wallARMTexture,
     normalMap: wallNormalTexture,
-  })
+  }),
 );
 walls.position.y += 2.5 / 2;
 house.add(walls);
@@ -202,7 +202,7 @@ const roof = new THREE.Mesh(
     roughnessMap: roofARMTexture,
     metalnessMap: roofARMTexture,
     normalMap: roofNormalTexture,
-  })
+  }),
 );
 roof.position.y = 2.5 + 0.75;
 roof.rotation.y = Math.PI / 4;
@@ -222,7 +222,7 @@ const door = new THREE.Mesh(
     normalMap: doorNormalTexture,
     metalnessMap: doorMetalnessTexture,
     roughnessMap: doorRoughnessTexture,
-  })
+  }),
 );
 
 door.position.z += 2 + 0.01;
@@ -313,11 +313,11 @@ house.add(doorLight);
 /**
  * Ghosts
  */
-const ghost1 = new THREE.PointLight("#8800ff", 6);
-const ghost2 = new THREE.PointLight("#ff0088", 6);
-const ghost3 = new THREE.PointLight("#ff0000", 6);
+// const ghost1 = new THREE.PointLight("#8800ff", 6);
+// const ghost2 = new THREE.PointLight("#ff0088", 6);
+// const ghost3 = new THREE.PointLight("#ff0000", 6);
 
-scene.add(ghost1, ghost2, ghost3);
+// scene.add(ghost1, ghost2, ghost3);
 
 /**
  * Sizes
@@ -349,7 +349,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
   0.1,
-  100
+  100,
 );
 camera.position.x = 4;
 camera.position.y = 2;
@@ -378,19 +378,19 @@ renderer.shadowMap.type = THREE.PCFShadowMap;
 
 // Cast and receive
 directionalLight.castShadow = true;
-ghost1.castShadow = true;
-ghost2.castShadow = true;
-ghost3.castShadow = true;
+// ghost1.castShadow = true;
+// ghost2.castShadow = true;
+// ghost3.castShadow = true;
 
 walls.castShadow = true;
 walls.receiveShadow = true;
 roof.castShadow = true;
 floor.receiveShadow = true;
 
-for (const grave of graves.children) {
-  grave.castShadow = true;
-  grave.receiveShadow = true;
-}
+// for (const grave of graves.children) {
+//   grave.castShadow = true;
+//   grave.receiveShadow = true;
+// }
 
 // Mapping
 directionalLight.shadow.mapSize.width = 256;
@@ -402,17 +402,17 @@ directionalLight.shadow.camera.left = -8;
 directionalLight.shadow.camera.near = 1;
 directionalLight.shadow.camera.far = 20;
 
-ghost1.shadow.mapSize.width = 256;
-ghost1.shadow.mapSize.height = 256;
-ghost1.shadow.camera.top = 10;
+// ghost1.shadow.mapSize.width = 256;
+// ghost1.shadow.mapSize.height = 256;
+// ghost1.shadow.camera.top = 10;
 
-ghost2.shadow.mapSize.width = 256;
-ghost2.shadow.mapSize.height = 256;
-ghost2.shadow.camera.top = 10;
+// ghost2.shadow.mapSize.width = 256;
+// ghost2.shadow.mapSize.height = 256;
+// ghost2.shadow.camera.top = 10;
 
-ghost3.shadow.mapSize.width = 256;
-ghost3.shadow.mapSize.height = 256;
-ghost3.shadow.camera.top = 10;
+// ghost3.shadow.mapSize.width = 256;
+// ghost3.shadow.mapSize.height = 256;
+// ghost3.shadow.camera.top = 10;
 
 /**
  * Sky
@@ -430,7 +430,7 @@ sky.material.uniforms["sunPosition"].value.set(0.3, -0.038, -0.95);
 /**
  * Fog
  */
-// scene.fog = new THREE.Fog("#10343f", 1, 13);
+scene.fog = new THREE.Fog("#10343f", 1, 13);
 scene.fog = new THREE.FogExp2("#10343f", 0.1);
 
 /**
@@ -444,29 +444,29 @@ const tick = () => {
   const elapsedTime = timer.getElapsed();
 
   // Ghost
-  const ghost1Angle = elapsedTime * 0.5;
-  ghost1.position.x = Math.cos(ghost1Angle) * 4;
-  ghost1.position.z = Math.sin(ghost1Angle) * 4;
-  ghost1.position.y =
-    Math.sin(ghost1Angle) *
-    Math.sin(ghost1Angle * 2.34) *
-    Math.sin(ghost1Angle * 3.45);
+  // const ghost1Angle = elapsedTime * 0.5;
+  // ghost1.position.x = Math.cos(ghost1Angle) * 4;
+  // ghost1.position.z = Math.sin(ghost1Angle) * 4;
+  // ghost1.position.y =
+  //   Math.sin(ghost1Angle) *
+  //   Math.sin(ghost1Angle * 2.34) *
+  //   Math.sin(ghost1Angle * 3.45);
 
-  const ghost2Angle = -elapsedTime * 0.38;
-  ghost2.position.x = Math.cos(ghost2Angle) * 5;
-  ghost2.position.z = Math.sin(ghost2Angle) * 5;
-  ghost2.position.y =
-    Math.sin(ghost2Angle) *
-    Math.sin(ghost2Angle * 2.34) *
-    Math.sin(ghost2Angle * 3.45);
+  // const ghost2Angle = -elapsedTime * 0.38;
+  // ghost2.position.x = Math.cos(ghost2Angle) * 5;
+  // ghost2.position.z = Math.sin(ghost2Angle) * 5;
+  // ghost2.position.y =
+  //   Math.sin(ghost2Angle) *
+  //   Math.sin(ghost2Angle * 2.34) *
+  //   Math.sin(ghost2Angle * 3.45);
 
-  const ghost3Angle = elapsedTime * 0.23;
-  ghost3.position.x = Math.cos(ghost3Angle) * 6;
-  ghost3.position.z = Math.sin(ghost3Angle) * 6;
-  ghost3.position.y =
-    Math.sin(ghost3Angle) *
-    Math.sin(ghost3Angle * 2.34) *
-    Math.sin(ghost3Angle * 3.45);
+  // const ghost3Angle = elapsedTime * 0.23;
+  // ghost3.position.x = Math.cos(ghost3Angle) * 6;
+  // ghost3.position.z = Math.sin(ghost3Angle) * 6;
+  // ghost3.position.y =
+  //   Math.sin(ghost3Angle) *
+  //   Math.sin(ghost3Angle * 2.34) *
+  //   Math.sin(ghost3Angle * 3.45);
 
   // Update controls
   controls.update();
